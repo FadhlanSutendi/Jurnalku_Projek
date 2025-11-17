@@ -16,7 +16,6 @@ class LoginPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
             SizedBox(
               width: double.infinity,
               child: Image.asset(
@@ -27,7 +26,6 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-           
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
@@ -38,7 +36,6 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 15),
-
                   const Text("Username atau NIS"),
                   const SizedBox(height: 5),
                   TextField(
@@ -51,9 +48,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 15),
-
                   const Text("Password"),
                   const SizedBox(height: 5),
                   TextField(
@@ -68,7 +63,6 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
@@ -87,7 +81,6 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 10),
                   const Center(
                     child: Text(
