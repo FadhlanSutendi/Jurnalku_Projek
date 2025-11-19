@@ -8,9 +8,19 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
-        label: const Text("Jelajahi siswa"),
+        label: const Text(
+          "Jelajahi siswa",
+          style: TextStyle(color: Colors.white),
+        ),
         icon: const Icon(Icons.explore),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF02398C),
+        elevation: 90,
+        hoverElevation: 30,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(60),
+        ),
+        extendedIconLabelSpacing: 8,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -23,33 +33,53 @@ class LoginPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-
             const SizedBox(height: 20),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Masuk untuk memulai Jurnalku",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  RichText(
+                    text: const TextSpan(
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(text: "Masuk untuk memulai "),
+                        TextSpan(
+                          text: "Jurnalku",
+                          style: TextStyle(color: Color(0xFF02398C)),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 15),
-                  const Text("Username atau NIS"),
+                  Text(
+                    "Username atau NIS",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 5),
                   TextField(
                     decoration: InputDecoration(
                       hintText: "Masukkan username atau NIS",
                       filled: true,
-                      fillColor: Colors.grey.shade100,
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
                   const SizedBox(height: 15),
-                  const Text("Password"),
+                  Text(
+                    "Password",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 5),
                   TextField(
                     obscureText: true,
@@ -57,7 +87,7 @@ class LoginPage extends StatelessWidget {
                       hintText: "Masukkan password",
                       suffixIcon: const Icon(Icons.visibility),
                       filled: true,
-                      fillColor: Colors.grey.shade100,
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -69,7 +99,7 @@ class LoginPage extends StatelessWidget {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(14),
-                        backgroundColor: Colors.blue,
+                        backgroundColor: const Color(0xFF02398C),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -77,7 +107,7 @@ class LoginPage extends StatelessWidget {
                       onPressed: () {},
                       child: const Text(
                         "Masuk",
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                   ),
@@ -91,12 +121,7 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
             ),
-
             const SizedBox(height: 40),
-
-            // ======================================
-            // JUDUL FITUR
-            // ======================================
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
@@ -104,9 +129,7 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-
             const SizedBox(height: 10),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
@@ -119,12 +142,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // ======================================
-            // FITUR FITUR (OUTLINE CARD)
-            // ======================================
             _buildFeature(
               icon: Icons.school,
               bgColor: Colors.yellow.shade100,
@@ -167,17 +185,63 @@ class LoginPage extends StatelessWidget {
               description:
                   "Monitoring langsung yang menciptakan lingkungan belajar efisien.",
             ),
-
             const SizedBox(height: 40),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              color: const Color(0xFF02398C),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/ig.png',
+                        width: 30,
+                        height: 30,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 20),
+                      Image.asset(
+                        'assets/icons/wa.png',
+                        width: 30,
+                        height: 30,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 20),
+                      Image.asset(
+                        'assets/icons/yt.png',
+                        width: 30,
+                        height: 30,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 20),
+                      Image.asset(
+                        'assets/icons/linkin.png',
+                        width: 30,
+                        height: 30,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  const Text(
+                    "© GEN-28 PPLG SMK Wikrama Bogor. All Rights Reserved..",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  // =========================================================
-  // CARD OUTLINE MIRIP DESAIN SCREENSHOT
-  // =========================================================
   Widget _buildFeature({
     required IconData icon,
     required Color bgColor,
@@ -191,14 +255,13 @@ class LoginPage extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: const Color(0xFFE5E7EB), // abu-abu soft outline
+          color: const Color(0xFFE5E7EB),
           width: 1.3,
         ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ICON DALAM KOTAK PASTEL
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
@@ -207,10 +270,7 @@ class LoginPage extends StatelessWidget {
             ),
             child: Icon(icon, size: 30),
           ),
-
           const SizedBox(width: 15),
-
-          // TEKS
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
