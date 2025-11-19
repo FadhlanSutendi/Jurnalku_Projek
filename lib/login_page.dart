@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalku_projek/dashboard_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -6,25 +7,25 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     floatingActionButton: FloatingActionButton.extended(
-  onPressed: () {},
-  label: const Text(
-    "Jelajahi siswa",
-    style: TextStyle(color: Colors.white),
-  ),
-  icon: const Icon(Icons.explore),
-  backgroundColor: const Color(0xFF02398C),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const Text(
+          "Jelajahi siswa",
+          style: TextStyle(color: Colors.white),
+        ),
+        icon: const Icon(Icons.explore),
+        backgroundColor: const Color(0xFF02398C),
 
-  elevation: 90,
-  hoverElevation: 30,
-  foregroundColor: Colors.white,
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(60),
-  ),
+        elevation: 10,
+        hoverElevation: 20,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(60),
+        ),
 
-  extendedIconLabelSpacing: 8,
-),
-
+        
+        extendedIconLabelSpacing: 8,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,15 +37,12 @@ class LoginPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-
             const SizedBox(height: 20),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-              
                   RichText(
                     text: const TextSpan(
                       style: TextStyle(
@@ -61,16 +59,13 @@ class LoginPage extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 15),
-
-                  Text(
+                  const Text(
                     "Username atau NIS",
                     style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                     ),
-                     ),
-
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 5),
                   TextField(
                     decoration: InputDecoration(
@@ -82,13 +77,12 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 15),
-
-                  Text("Password",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  const Text(
+                    "Password",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 5),
                   TextField(
@@ -103,7 +97,6 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
@@ -115,14 +108,20 @@ class LoginPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DashboardPage(),
+        ),
+      );
+                      },
                       child: const Text(
                         "Masuk",
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 10),
                   const Center(
                     child: Text(
@@ -133,9 +132,7 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
             ),
-
             const SizedBox(height: 40),
-
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
@@ -143,9 +140,7 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-
             const SizedBox(height: 10),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
@@ -158,9 +153,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
             _buildFeature(
               icon: Icons.school,
               bgColor: Colors.yellow.shade100,
@@ -203,13 +196,10 @@ class LoginPage extends StatelessWidget {
               description:
                   "Monitoring langsung yang menciptakan lingkungan belajar efisien.",
             ),
-
             const SizedBox(height: 40),
-
             Container(
               width: double.infinity,
-              padding:
-                  const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
               color: const Color(0xFF02398C),
               child: Column(
                 children: [
@@ -262,6 +252,8 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
+  
 
   Widget _buildFeature({
     required IconData icon,
