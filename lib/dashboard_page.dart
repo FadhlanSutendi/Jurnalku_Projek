@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_projek/widgets/feature_box.dart';
+import 'package:jurnalku_projek/widgets/dashboard_app_bar.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -9,209 +10,14 @@ class DashboardPage extends StatelessWidget {
     const Color darkBlue = Color(0xFF0D47A1);
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home_outlined),
-          onPressed: () {},
-        ),
-        actions: [
-          PopupMenuButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
-            ),
-            offset: const Offset(-25, 50),
-            itemBuilder: (context) => [
-              // ... (Kode PopupMenuItem Anda tetap sama) ...
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.home_outlined),
-                      SizedBox(width: 10),
-                      Text("Dashboard"),
-                    ],
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.person_outline),
-                      SizedBox(width: 10),
-                      Text("Profil"),
-                    ],
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.explore_outlined),
-                      SizedBox(width: 10),
-                      Text("Jelajahi"),
-                    ],
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.book),
-                      SizedBox(width: 10),
-                      Text("Jurnal Pembiasaan"),
-                    ],
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.person_rounded),
-                      SizedBox(width: 10),
-                      Text("Permintaan Saksi"),
-                    ],
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.stacked_bar_chart_outlined),
-                      SizedBox(width: 10),
-                      Text("Progress"),
-                    ],
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.warning),
-                      SizedBox(width: 10),
-                      Text("Catatan Sikap"),
-                    ],
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.menu_book_outlined),
-                      SizedBox(width: 10),
-                      Text("Panduan Penggunaan"),
-                    ],
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.settings_outlined),
-                      SizedBox(width: 10),
-                      Text("Pengaturan Akun"),
-                    ],
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(Icons.logout),
-                      SizedBox(width: 10),
-                      Text("Logout"),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-            child: const Row(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "M. Delvin Julian",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      "PPLG XII-5",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(width: 15),
-                CircleAvatar(
-                  radius: 20,
-                  backgroundImage: AssetImage("Assets/Images/1 login.jpg"),
-                ),
-                SizedBox(width: 15),
-              ],
-            ),
-          ),
-        ],
+      appBar: DashboardAppBar(
+        titleText: "Dashboard",
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // 1. Container Biru Latar Belakang
             Container(
-              height: 320, // Tinggi dikembalikan ke 320
+              height: 320,
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
@@ -246,7 +52,6 @@ class DashboardPage extends StatelessWidget {
                 ),
               ),
             ),
-
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
@@ -289,21 +94,24 @@ class DashboardPage extends StatelessWidget {
                 ),
               ),
             ),
-
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 children: [
                   FeatureBox(
-                    icon: Icons.account_balance,
+                    image: 'assets/icons/school.png',
                     title: "Dirancang Khusus",
                     description:
                         "Memenuhi kebutuhan spesifik sekolah kami dengan fokus pada kemajuan siswa.",
                   ),
-
-                  // Kotak Fitur Kedua
                   FeatureBox(
-                    icon: Icons.timer,
+                    image: 'assets/icons/student.png',
+                    title: "Pemantauan Real-Time",
+                    description:
+                        "Lihat perkembangan dan kegiatan siswa secara langsung kapan saja dan di mana saja.",
+                  ),
+                  FeatureBox(
+                    image: 'assets/icons/wisuda.png',
                     title: "Pemantauan Real-Time",
                     description:
                         "Lihat perkembangan dan kegiatan siswa secara langsung kapan saja dan di mana saja.",
