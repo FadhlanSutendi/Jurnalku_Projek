@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalku_projek/dashboard_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -14,8 +15,8 @@ class LoginPage extends StatelessWidget {
         ),
         icon: const Icon(Icons.explore),
         backgroundColor: const Color(0xFF02398C),
-        elevation: 90,
-        hoverElevation: 30,
+        elevation: 10,
+        hoverElevation: 20,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(60),
@@ -56,7 +57,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  Text(
+                  const Text(
                     "Username atau NIS",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -74,7 +75,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  Text(
+                  const Text(
                     "Password",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -104,7 +105,14 @@ class LoginPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DashboardPage(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         "Masuk",
                         style: TextStyle(fontSize: 20, color: Colors.white),
