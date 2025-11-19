@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_projek/dashboard_page.dart';
 import 'package:jurnalku_projek/explore_page.dart';
+import 'package:jurnalku_projek/profile_page.dart';
+import 'package:jurnalku_projek/panduan_pengguna_page.dart';
 
 class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titleText;
@@ -34,30 +36,32 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           offset: const Offset(-25, 50),
           itemBuilder: (context) => [
-            // MENU ITEMS (copy + paste dari kodemu)
             PopupMenuItem(
               child: InkWell(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DashboardPage()),
-                );
-              },
-              child: const Row(
-                children: [
-                Icon(Icons.home_outlined),
-                SizedBox(width: 10),
-                Text("Dashboard"),
-                ],
-              ),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DashboardPage()),
+                  );
+                },
+                child: const Row(
+                  children: [
+                    Icon(Icons.home_outlined),
+                    SizedBox(width: 10),
+                    Text("Dashboard"),
+                  ],
+                ),
               ),
             ),
             PopupMenuItem(
               child: InkWell(
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
                 },
                 child: const Row(
                   children: [
@@ -71,12 +75,12 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
             PopupMenuItem(
               child: InkWell(
                 onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ExplorePage()),
-                );
-              },
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ExplorePage()),
+                  );
+                },
                 child: const Row(
                   children: [
                     Icon(Icons.explore_outlined),
@@ -150,7 +154,10 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: InkWell(
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PanduanPage()),
+                  );
                 },
                 child: const Row(
                   children: [
