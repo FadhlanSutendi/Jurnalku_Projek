@@ -31,12 +31,7 @@ class _ExplorePageState extends State<ExplorePage> {
     "Cibedug 3"
   ];
 
-  final List<String> jurusanList = [
-    "Semua Jurusan",
-    "PPLG",
-    "DKV",
-    "TJKT"
-  ];
+  final List<String> jurusanList = ["Semua Jurusan", "PPLG", "DKV", "TJKT"];
 
   final List<Map<String, dynamic>> students = [
     {
@@ -89,67 +84,63 @@ class _ExplorePageState extends State<ExplorePage> {
       backgroundColor: Colors.grey.shade100,
       body: Column(
         children: [
-
-
-Container(
-  height: 60,
-  padding: EdgeInsets.symmetric(horizontal: 16),
-  color: Colors.white,
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      InkWell(
-        onTap: () {
-          // Arahkan ke halaman lain (atau halaman sama)
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DashboardPage()),
-          );
-        },
-        child: Row(
-          children: [
-            Icon(Icons.menu_book_rounded, color: Colors.blue[900], size: 28),
-            SizedBox(width: 8),
-            Text(
-              "Jurnalku",
-              style: TextStyle(
-                color: Colors.blue[900],
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+          Container(
+            height: 60,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    // Arahkan ke halaman lain (atau halaman sama)
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DashboardPage()),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.menu_book_rounded,
+                          color: Colors.blue[900], size: 28),
+                      SizedBox(width: 8),
+                      Text(
+                        "Jurnalku",
+                        style: TextStyle(
+                          color: Colors.blue[900],
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    // Bisa arahkan ke halaman dashboardmu
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DashboardPage()),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[900],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      "Dashboard",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
-          ],
-        ),
-      ),
-
-      InkWell(
-        onTap: () {
-          // Bisa arahkan ke halaman dashboardmu
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DashboardPage()),
-          );
-        },
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-          decoration: BoxDecoration(
-            color: Colors.blue[900],
-            borderRadius: BorderRadius.circular(12),
           ),
-          child: Text(
-            "Dashboard",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      )
-    ],
-  ),
-),
-
-
           Stack(
             children: [
               Container(

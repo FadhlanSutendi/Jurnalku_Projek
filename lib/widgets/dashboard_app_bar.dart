@@ -21,7 +21,15 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       title: Row(
         children: [
-          const Icon(Icons.home_outlined),
+            IconButton(
+            icon: const Icon(Icons.home_outlined),
+            onPressed: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DashboardPage()),
+              );
+            },
+            ),
           const SizedBox(width: 6),
           Text(
             "> $titleText",
@@ -220,7 +228,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "M. Delvin Julian",
+                    "Anak Wikrama",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

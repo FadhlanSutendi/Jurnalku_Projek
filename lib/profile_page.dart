@@ -10,16 +10,15 @@ class ProfilePage extends StatelessWidget {
     const double positionedBottom = -profileRadius;
     const double spacerHeight = profileRadius + 10;
 
-    return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      appBar: DashboardAppBar(
-        titleText: "Profile",
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        backgroundColor: Colors.grey.shade100,
+        appBar: const DashboardAppBar(
+          titleText: "Profile",
+        ),
+        body: Column(
           children: [
-            // Cover Image + Profile Picture
             Stack(
               clipBehavior: Clip.none,
               children: [
@@ -35,8 +34,6 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // Profile Picture
                 Positioned(
                   bottom: positionedBottom,
                   left: 20,
@@ -44,7 +41,7 @@ class ProfilePage extends StatelessWidget {
                     radius: profileRadius,
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
-                      radius: profileRadius - 5, // 40
+                      radius: profileRadius - 5,
                       backgroundImage: const AssetImage(
                         "assets/images/orange_cat.png",
                       ),
@@ -66,7 +63,7 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "M. Delvin Julian",
+                        "Anak Wikrama",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 22,
@@ -74,7 +71,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        "12309719 | PPLG XII-5 | Cib 6",
+                        "12309719 | PPLG XII-5 | Cis 6",
                         style: TextStyle(
                           color: Colors.black54,
                           fontSize: 14,
@@ -100,7 +97,9 @@ class ProfilePage extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Tabs
+            // =========================================
+            // 2. TAB BAR
+            // =========================================
             Container(
               height: 50,
               margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -108,99 +107,114 @@ class ProfilePage extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Row(
+              child: TabBar(
+                indicatorSize: TabBarIndicatorSize.label,
+                labelColor: const Color(0xFF0056D2), // Warna teks aktif
+                unselectedLabelColor: Colors.black54, // Warna teks tidak aktif
+                indicatorColor: const Color(0xFF0056D2), // Garis bawah biru
+                // Jika ingin menghilangkan garis bawah dan hanya main warna teks,
+                // set indicatorColor: Colors.transparent
+                tabs: const [
+                  Tab(text: "Overview"),
+                  Tab(text: "Portfolio"),
+                  Tab(text: "Sertifikat"),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            // =========================================
+            // 3. ISI TAB (TAB BAR VIEW)
+            // =========================================
+            Expanded(
+              child: TabBarView(
                 children: [
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "Overview",
-                        style: TextStyle(
-                          color: Color(0xFF0056D2),
-                          fontWeight: FontWeight.w600,
+                  // --- TAB 1: OVERVIEW ---
+                  // Isinya lengkap (Box Portfolio, Sertif, CV, Sosmed)
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.only(bottom: 40, top: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _sectionBox(
+                          title: "Portfolio Terbaru",
+                          icon: Icons.work,
+                          desc: "Portfolio akan ditampilkan di sini",
                         ),
-                      ),
+                        _sectionBox(
+                          title: "Sertifikat Terbaru",
+                          icon: Icons.emoji_events,
+                          desc: "Sertifikat akan ditampilkan di sini",
+                        ),
+                        const SizedBox(height: 20),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            "Dokumen",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        _cvCard(),
+                        const SizedBox(height: 20),
+                        _socialMediaCard(),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "Portfolio",
-                        style: TextStyle(
-                          color: Colors.black54,
+
+                  // --- TAB 2: PORTFOLIO ---
+                  // Hanya menampilkan Container Portfolio
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Column(
+                      children: [
+                        _sectionBox(
+                          title: "Portfolio",
+                          icon: Icons.work,
+                          desc: "Portfolio akan ditampilkan di sini",
+                          showButton:
+                              false, // Opsi sembunyikan tombol lihat semua jika mau
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "Sertifikat",
-                        style: TextStyle(
-                          color: Colors.black54,
+
+                  // --- TAB 3: SERTIFIKAT ---
+                  // Container dengan teks khusus
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Column(
+                      children: [
+                        _sectionBox(
+                          title: "Sertifikat",
+                          icon: Icons.emoji_events,
+                          desc:
+                              "Anda belum mendapatkan sertifikat apapun", // Teks Khusus
+                          showButton: false,
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-
-            const SizedBox(height: 20),
-
-            // Portfolio Terbaru
-            _sectionBox(
-              title: "Portfolio Terbaru",
-              icon: Icons.work,
-              desc: "Portfolio akan ditampilkan di sini",
-            ),
-
-            // Sertifikat Terbaru
-            _sectionBox(
-              title: "Sertifikat Terbaru",
-              icon: Icons.emoji_events,
-              desc: "Sertifikat akan ditampilkan di sini",
-            ),
-
-            const SizedBox(height: 20),
-
-            // Title: Dokumen
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                "Dokumen",
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            
-            const SizedBox(height: 10),
-
-            // =========================================
-            //  BAGIAN BARU (Sesuai Gambar Referensi)
-            // =========================================
-            
-            // 1. Card Curriculum Vitae
-            _cvCard(),
-
-            const SizedBox(height: 20),
-
-            // 2. Card Media Sosial
-            _socialMediaCard(),
-
-            const SizedBox(height: 40), // Space bawah agar bisa scroll lebih jauh
           ],
         ),
       ),
     );
   }
 
-  // --- Widget Helper Lama ---
+  // --- Widget Helper (Sedikit modifikasi agar fleksibel) ---
   Widget _sectionBox({
     required String title,
     required IconData icon,
     required String desc,
+    bool showButton =
+        true, // Parameter baru untuk menyembunyikan tombol "Lihat Semua"
   }) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
@@ -223,13 +237,14 @@ class ProfilePage extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                Text(
-                  "Lihat Semua",
-                  style: TextStyle(
-                    color: Colors.blue.shade700,
-                    fontSize: 13,
+                if (showButton)
+                  Text(
+                    "Lihat Semua",
+                    style: TextStyle(
+                      color: Colors.blue.shade700,
+                      fontSize: 13,
+                    ),
                   ),
-                ),
               ],
             ),
           ),
@@ -248,7 +263,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // --- Widget Helper Baru: CV Card ---
+  // --- Widget Helper: CV Card ---
   Widget _cvCard() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -279,14 +294,12 @@ class ProfilePage extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
-              onPressed: () {
-                // Aksi lihat CV
-              },
+              onPressed: () {},
               icon: const Icon(Icons.file_copy_outlined, size: 18),
               label: const Text("Lihat CV"),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF003E8C), // Warna biru gelap sesuai gambar
-                foregroundColor: Colors.white, // Warna text/icon putih
+                backgroundColor: const Color(0xFF003E8C),
+                foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -300,7 +313,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // --- Widget Helper Baru: Social Media Card ---
+  // --- Widget Helper: Social Media Card ---
   Widget _socialMediaCard() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -323,11 +336,10 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          const Divider(height: 1, color: Colors.black12), // Garis pemisah tipis
-          
-          // Item Instagram
+          const Divider(height: 1, color: Colors.black12),
           ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             leading: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -343,12 +355,11 @@ class ProfilePage extends StatelessWidget {
             subtitle: Text(
               "https://instagram.com/devaajul/",
               style: TextStyle(color: Colors.blue.shade700),
-              overflow: TextOverflow.ellipsis, // Agar text tidak nabrak jika kepanjangan
+              overflow: TextOverflow.ellipsis,
             ),
-            trailing: const Icon(Icons.open_in_new, size: 20, color: Colors.grey),
-            onTap: () {
-              // Aksi buka link
-            },
+            trailing:
+                const Icon(Icons.open_in_new, size: 20, color: Colors.grey),
+            onTap: () {},
           ),
         ],
       ),
