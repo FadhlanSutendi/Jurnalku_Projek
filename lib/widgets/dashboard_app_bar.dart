@@ -3,6 +3,8 @@ import 'package:jurnalku_projek/dashboard_page.dart';
 import 'package:jurnalku_projek/explore_page.dart';
 import 'package:jurnalku_projek/profile_page.dart';
 import 'package:jurnalku_projek/panduan_pengguna_page.dart';
+import 'package:jurnalku_projek/account_settings.dart';
+import 'package:jurnalku_projek/permintaan_saksi_page.dart';
 
 class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titleText;
@@ -109,7 +111,10 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: InkWell(
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PermintaanSaksiPage()),
+                  );
                 },
                 child: const Row(
                   children: [
@@ -172,7 +177,11 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: InkWell(
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AccountSettingsPage()),
+                  );
                 },
                 child: const Row(
                   children: [
