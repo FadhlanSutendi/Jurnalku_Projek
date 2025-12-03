@@ -362,9 +362,7 @@ class MenuItemCard extends StatelessWidget {
 }
 
 
-// ===================================================================
-//                        STAT CARD
-// ===================================================================
+
 
 class StatCard extends StatelessWidget {
   final String title;
