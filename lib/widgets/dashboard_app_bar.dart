@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_projek/dashboard_page.dart';
 import 'package:jurnalku_projek/explore_page.dart';
+import 'package:jurnalku_projek/login_page.dart';
 import 'package:jurnalku_projek/profile_page.dart';
 import 'package:jurnalku_projek/panduan_pengguna_page.dart';
 import 'package:jurnalku_projek/account_settings.dart';
@@ -211,7 +212,11 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: InkWell(
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LoginPage()),
+                  );
                 },
                 child: const Row(
                   children: [

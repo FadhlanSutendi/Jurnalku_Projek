@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_projek/dashboard_page.dart';
+import 'package:jurnalku_projek/explore_page_!login.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -8,7 +9,14 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ExplorePageLogin(),
+            ),
+          );
+        },
         label: const Text(
           "Jelajahi siswa",
           style: TextStyle(color: Colors.white),
