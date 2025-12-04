@@ -77,45 +77,43 @@ class CatatanSikapPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
+            
             // ===================
-            // SUMMARY ROW
-            // ===================
-            Row(
-              children: [
-                Expanded(
-                  child: _summaryCard(
-                    title: "Total Catatan",
-                    value: data.length.toString(),
-                    icon: Icons.article_rounded,
-                    color: Colors.blue,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _summaryCard(
-                    title: "Dalam Perbaikan",
-                    value: data
-                        .where((e) => e["status"] == "Dalam Perbaikan")
-                        .length
-                        .toString(),
-                    icon: Icons.bolt_rounded,
-                    color: Colors.orange,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _summaryCard(
-                    title: "Sudah Berubah",
-                    value: data
-                        .where((e) => e["status"] == "Sudah Berubah")
-                        .length
-                        .toString(),
-                    icon: Icons.check_circle_rounded,
-                    color: Colors.green,
-                  ),
-                ),
-              ],
-            ),
+// SUMMARY COLUMN (VERTICAL)
+// ===================
+Column(
+  children: [
+    _summaryCard(
+      title: "Total Catatan",
+      value: data.length.toString(),
+      icon: Icons.article_rounded,
+      color: Colors.blue,
+    ),
+    const SizedBox(height: 16),
+
+    _summaryCard(
+      title: "Dalam Perbaikan",
+      value: data
+          .where((e) => e["status"] == "Dalam Perbaikan")
+          .length
+          .toString(),
+      icon: Icons.bolt_rounded,
+      color: Colors.orange,
+    ),
+    const SizedBox(height: 16),
+
+    _summaryCard(
+      title: "Sudah Berubah",
+      value: data
+          .where((e) => e["status"] == "Sudah Berubah")
+          .length
+          .toString(),
+      icon: Icons.check_circle_rounded,
+      color: Colors.green,
+    ),
+  ],
+),
+
 
             const SizedBox(height: 20),
 
@@ -288,10 +286,10 @@ class _CatatanItemState extends State<CatatanItem> {
                   _detail("Update Terakhir", widget.item["update"]),
                   const SizedBox(height: 12),
 
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Lihat Detail"),
-                  )
+                  // ElevatedButton(
+                  //   onPressed: () {},
+                  //   child: const Text("Lihat Detail"),
+                  // )
                 ],
               ),
             )
