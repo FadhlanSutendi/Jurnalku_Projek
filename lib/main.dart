@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jurnalku_projek/explore_page.dart';
+// import 'package:jurnalku_projek/explore_page.dart';
 import 'package:jurnalku_projek/login_page.dart';
 
 void main() {

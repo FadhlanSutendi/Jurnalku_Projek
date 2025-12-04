@@ -6,305 +6,110 @@ class PermintaanSaksiPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Data Dummy untuk contoh 3 item
-    final List<Map<String, String>> dummyData = [
+    final List<Map<String, String>> dataSiswa = [
       {
-        "pengirim": "Ahmad Rizky",
-        "tanggal": "19 Nov 2025",
+        "nama": "Ahmad Rizky",
+        "kelas": "PPLG X-3",
         "status": "Menunggu",
-        "detail":
-            "Mohon kesediaannya menjadi saksi atas kejadian bullying di kantin jam istirahat."
+        "pesan": "Tolong jadi saksi saya untuk kejadian di kantin."
       },
       {
-        "pengirim": "Siti Aminah",
-        "tanggal": "18 Nov 2025",
+        "nama": "Siti Aminah",
+        "kelas": "PPLG XI-2",
         "status": "Diterima",
-        "detail": "Saya butuh saksi untuk laporan kehilangan helm di parkiran."
+        "pesan": "Makasih ya kak sudah mau jadi saksi helm hilang."
       },
       {
-        "pengirim": "Budi Santoso",
-        "tanggal": "15 Nov 2025",
+        "nama": "Budi Santoso",
+        "kelas": "PPLG XII-5",
         "status": "Ditolak",
-        "detail": "Saksi kejadian perkelahian di lapangan basket."
+        "pesan": "Bro, bantuin jadi saksi tawuran kemarin dong."
       },
     ];
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const DashboardAppBar(titleText: "Permintaan Saksi"),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Permintaan Saksi",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF002147),
-                ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Daftar Permintaan Masuk",
+              style: TextStyle(
+                fontSize: 22, 
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF002147),
               ),
-              const SizedBox(height: 8),
-              const Text(
-                "Kelola permintaan menjadi saksi dari siswa lain",
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color(0xFF757575),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE3F2FD),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text(
-                  "Wednesday, 19 November 2025",
-                  style: TextStyle(
-                    color: Color(0xFF1565C0),
-                    fontWeight: FontWeight.w600,
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              "Di bawah ini adalah daftar siswa yang meminta kamu menjadi saksi untuk laporan mereka.",
+              style: TextStyle(color: Colors.grey),
+            ),
+            const SizedBox(height: 20),
+            ListView.builder(
+              shrinkWrap: true, 
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: dataSiswa.length,
+              itemBuilder: (context, index) {
+                final siswa = dataSiswa[index];
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
                   ),
-                ),
-              ),
-              const SizedBox(height: 25),
-
-              // --- BAGIAN YANG DIUBAH ---
-              Container(
-                width: double.infinity,
-                constraints: const BoxConstraints(
-                    minHeight: 100), // Min height disesuaikan
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE5E5E5)),
-                ),
-                child: Column(
-                  children: [
-                    // HEADER TABEL
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15,
-                          horizontal:
-                              16), // Tambah padding horizontal agar sejajar
-                      decoration: const BoxDecoration(
-                        color: Color(0xFFF7F7F7),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12),
-                        ),
-                        border: Border(
-                          bottom: BorderSide(color: Color(0xFFE0E0E0)),
-                        ),
-                      ),
-                      child: Row(
-                        children: const [
-                          Expanded(
-                            flex: 3,
-                            child: Text(
-                              "PENGIRIM",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: Color(0xFF757575),
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              "TANGGAL",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: Color(0xFF757575),
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Text(
-                              "KONFIRMASI",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: Color(0xFF757575),
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ),
-                          // Spacer untuk kompensasi icon panah expansion tile
-                          SizedBox(width: 24),
-                        ],
-                      ),
+                  child: ExpansionTile(
+                    leading: CircleAvatar(
+                      backgroundColor: const Color(0xFFE3F2FD),
+                      child: Text(siswa['nama']![0]),
                     ),
-
-                    // LIST ITEM (EXPANSION TILES)
-                    Column(
-                      children: dummyData.map((data) {
-                        return Container(
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Color(0xFFEEEEEE)),
-                            ),
-                          ),
-                          child: Theme(
-                            // Menghilangkan garis border default ExpansionTile
-                            data: Theme.of(context)
-                                .copyWith(dividerColor: Colors.transparent),
-                            child: ExpansionTile(
-                              tilePadding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 4),
-                              title: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 3,
-                                    child: Text(
-                                      data['pengirim']!,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        color: Color(0xFF002147),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      data['tanggal']!,
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xFF616161),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Center(
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 4),
-                                        decoration: BoxDecoration(
-                                          color:
-                                              _getStatusColor(data['status']!)
-                                                  .withOpacity(0.1),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: Text(
-                                          data['status']!,
-                                          style: TextStyle(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.bold,
-                                            color: _getStatusColor(
-                                                data['status']!),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                    title: Text(
+                      siswa['nama']!,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(siswa['kelas']!),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Status: ${siswa['status']}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: siswa['status'] == 'Menunggu' ? Colors.orange : Colors.green,
                               ),
-                              children: [
-                                Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                                  width: double.infinity,
-                                  color: Colors.white,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Divider(),
-                                      const Text(
-                                        "Detail Kejadian:",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12,
-                                          color: Color(0xFF757575),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        data['detail']!,
-                                        style: const TextStyle(
-                                            fontSize: 13,
-                                            color: Colors.black87),
-                                      ),
-                                      const SizedBox(height: 12),
-                                      // Tombol Aksi (Hanya muncul jika status Menunggu)
-                                      if (data['status'] == 'Menunggu')
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: OutlinedButton(
-                                                onPressed: () {},
-                                                style: OutlinedButton.styleFrom(
-                                                  foregroundColor: Colors.red,
-                                                  side: const BorderSide(
-                                                      color: Colors.red),
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 0),
-                                                ),
-                                                child: const Text("Tolak"),
-                                              ),
-                                            ),
-                                            const SizedBox(width: 10),
-                                            Expanded(
-                                              child: ElevatedButton(
-                                                onPressed: () {},
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      const Color(0xFF002147),
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 0),
-                                                ),
-                                                child: const Text("Terima",
-                                                    style: TextStyle(
-                                                        color: Colors.white)),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                    ],
-                                  ),
+                            ),
+                            const SizedBox(height: 8),
+                            const Text("Pesan Siswa:"),
+                            Text(
+                              "\"${siswa['pesan']}\"",
+                              style: const TextStyle(fontStyle: FontStyle.italic),
+                            ),
+                            const SizedBox(height: 10),
+                            if (siswa['status'] == 'Menunggu')
+                              ElevatedButton(
+                                onPressed: (){}, 
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF002147)
                                 ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              ),
-              // --- AKHIR BAGIAN YANG DIUBAH ---
-            ],
-          ),
+                                child: const Text("Respon Permintaan", style: TextStyle(color: Colors.white)),
+                              )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  // Helper untuk warna status
-  Color _getStatusColor(String status) {
-    switch (status) {
-      case 'Menunggu':
-        return Colors.orange;
-      case 'Diterima':
-        return Colors.green;
-      case 'Ditolak':
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
   }
 }
