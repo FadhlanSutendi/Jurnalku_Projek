@@ -126,7 +126,7 @@ class _ExplorePageState extends State<ExplorePage> {
 
           const SizedBox(height: 15),
 
-          // 🔥🔥🔥 CONTAINER PUTIH PEMBUNGKUS 🔥🔥🔥
+
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
             padding: const EdgeInsets.all(15),
@@ -237,6 +237,24 @@ class _ExplorePageState extends State<ExplorePage> {
               rayon: "Cic 3",
               portfolio: 3,
               sertifikat: 6,
+            ),
+            _studentCard(
+              name: "Nisa Samrotul Fuadah",
+              nis: "12309480",
+              photoUrl: "assets/images/profile.jpg",
+              rombel: "PPLG XII-5",
+              rayon: "Cic 9",
+              portfolio: 9,
+              sertifikat: 10,
+            ),
+            _studentCard(
+              name: "Nisa Auliani",
+              nis: "12309480",
+              photoUrl: "assets/images/profile.jpg",
+              rombel: "PPLG XII-5",
+              rayon: "Cic 8",
+              portfolio: 2,
+              sertifikat: 5,
             ),
 
             const SizedBox(height: 30),

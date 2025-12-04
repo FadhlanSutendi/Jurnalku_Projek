@@ -77,49 +77,43 @@ class CatatanSikapPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            
-            // ===================
-// SUMMARY COLUMN (VERTICAL)
-// ===================
-Column(
-  children: [
-    _summaryCard(
-      title: "Total Catatan",
-      value: data.length.toString(),
-      icon: Icons.article_rounded,
-      color: Colors.blue,
-    ),
-    const SizedBox(height: 16),
+          
+            Column(
+              children: [
+                _summaryCard(
+                  title: "Total Catatan",
+                  value: data.length.toString(),
+                  icon: Icons.article_rounded,
+                  color: Colors.blue,
+                ),
+                const SizedBox(height: 16),
 
-    _summaryCard(
-      title: "Dalam Perbaikan",
-      value: data
-          .where((e) => e["status"] == "Dalam Perbaikan")
-          .length
-          .toString(),
-      icon: Icons.bolt_rounded,
-      color: Colors.orange,
-    ),
-    const SizedBox(height: 16),
+                _summaryCard(
+                  title: "Dalam Perbaikan",
+                  value: data
+                      .where((e) => e["status"] == "Dalam Perbaikan")
+                      .length
+                      .toString(),
+                  icon: Icons.bolt_rounded,
+                  color: Colors.orange,
+                ),
+                const SizedBox(height: 16),
 
-    _summaryCard(
-      title: "Sudah Berubah",
-      value: data
-          .where((e) => e["status"] == "Sudah Berubah")
-          .length
-          .toString(),
-      icon: Icons.check_circle_rounded,
-      color: Colors.green,
-    ),
-  ],
-),
+                _summaryCard(
+                  title: "Sudah Berubah",
+                  value: data
+                      .where((e) => e["status"] == "Sudah Berubah")
+                      .length
+                      .toString(),
+                  icon: Icons.check_circle_rounded,
+                  color: Colors.green,
+                ),
+              ],
+            ),
 
 
             const SizedBox(height: 20),
 
-            // ===================
-            // LIST SECTION
-            // ===================
             if (data.isEmpty)
               const _EmptyState()
             else
@@ -132,9 +126,6 @@ Column(
     );
   }
 
-  // ===================
-  // SUMMARY CARD WIDGET
-  // ===================
   Widget _summaryCard({
     required String title,
     required String value,
@@ -180,9 +171,7 @@ Column(
   }
 }
 
-// =============================
-// CARD ITEM (DROPDOWN MOBILE)
-// =============================
+
 class CatatanItem extends StatefulWidget {
   final Map<String, dynamic> item;
 
@@ -285,11 +274,6 @@ class _CatatanItemState extends State<CatatanItem> {
                   _detail("Dilaporkan", widget.item["dilaporkan"]),
                   _detail("Update Terakhir", widget.item["update"]),
                   const SizedBox(height: 12),
-
-                  // ElevatedButton(
-                  //   onPressed: () {},
-                  //   child: const Text("Lihat Detail"),
-                  // )
                 ],
               ),
             )
@@ -315,9 +299,7 @@ class _CatatanItemState extends State<CatatanItem> {
   }
 }
 
-// =============================
-// EMPTY STATE
-// =============================
+
 class _EmptyState extends StatelessWidget {
   const _EmptyState();
 
