@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import 'package:jurnalku_projek/dashboard_page.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
