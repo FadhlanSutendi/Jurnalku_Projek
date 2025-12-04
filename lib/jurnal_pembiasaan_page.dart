@@ -6,289 +6,385 @@ class JurnalPembiasaanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> dummyPekerjaan = [
+      {
+        "pekerjaan": "Memperbaiki Wifi Lab",
+        "tanggal": "12 Nov 2025",
+        "saksi": "Pak Budi",
+        "status": "Selesai"
+      },
+      {
+        "pekerjaan": "Install Ulang PC 05",
+        "tanggal": "13 Nov 2025",
+        "saksi": "Bu Siti",
+        "status": "Proses"
+      },
+    ];
+
+    final List<Map<String, String>> dummyMateri = [
+      {
+        "materi": "Routing Statis MikroTik",
+        "status": "A",
+        "tanggal": "10 Nov 2025",
+        "catatan": "Sudah paham konsep dasar."
+      },
+      {
+        "materi": "VLAN Trunking",
+        "status": "P",
+        "tanggal": "11 Nov 2025",
+        "catatan": "Menunggu pengecekan mentor."
+      },
+    ];
+
     return Scaffold(
-      appBar: DashboardAppBar(titleText: "Jurnal Pembiasaan"),
-      body: ListView(
+      backgroundColor: Colors.grey.shade50,
+      appBar: const DashboardAppBar(titleText: "Jurnal Pembiasaan"),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
-        children: [
-          // TITLE
-          const Text(
-            "Jurnal Pembiasaan",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 4),
-          const Text(
-            "NOVEMBER - 2025",
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-
-          const SizedBox(height: 16),
-
-          // BUTTON BULAN SEBELUMNYA
-          SizedBox(
-            width: 160,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Jurnal Pembiasaan",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "NOVEMBER - 2025",
+              style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.arrow_back_ios, size: 14),
+                label: const Text("Lihat Bulan Sebelumnya"),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  side: const BorderSide(color: Colors.blue),
+                ),
               ),
-              child: const Text("Bulan Sebelumnya"),
             ),
-          ),
-
-          const SizedBox(height: 20),
-
-          // A. PEMBIASAAN HARIAN
-          const Text(
-            "A. Pembiasaan harian",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 12),
-
-          // LEGEND
-          Row(
-            children: [
-              _buildLegend(Colors.green, "Sudah diisi"),
-              const SizedBox(width: 12),
-              _buildLegend(Colors.yellow, "Belum diisi"),
-              const SizedBox(width: 12),
-              _buildLegend(Colors.red, "Tidak diisi"),
-            ],
-          ),
-          const SizedBox(height: 16),
-
-          // KALENDER
-          _buildCalendar(),
-
-          const SizedBox(height: 28),
-
-          // B. Pekerjaan
-          const Text(
-            "B. Pekerjaan yang dilakukan",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 12),
-
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
-            ),
-            child: Column(
+            const SizedBox(height: 25),
+            _buildSectionTitle("A. Pembiasaan harian"),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 12,
+              runSpacing: 8,
               children: [
-                _buildTableHeader(["Pekerjaan", "Tgl", "Saksi"]),
-                const ListTile(
-                  title: Text("Belum ada pekerjaan yang diinput."),
-                  dense: true,
-                ),
-                _buildAddButton("Tambah Pekerjaan"),
+                _buildLegend(Colors.green, "Sudah diisi"),
+                _buildLegend(Colors.orange, "Belum diisi"),
+                _buildLegend(Colors.red, "Tidak diisi"),
               ],
             ),
-          ),
-
-          const SizedBox(height: 28),
-
-          // C. Materi yang dipelajari
-          const Text(
-            "C. Materi yang dipelajari",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 12),
-
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
+            const SizedBox(height: 16),
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: _buildCalendar(),
+              ),
             ),
-            child: Column(
+            const SizedBox(height: 30),
+            _buildSectionTitle("B. Pekerjaan yang dilakukan"),
+            const SizedBox(height: 10),
+            if (dummyPekerjaan.isEmpty)
+              _buildEmptyState("Belum ada pekerjaan.")
+            else
+              Column(
+                children: dummyPekerjaan.map((data) {
+                  return _buildExpansionCard(
+                    title: data['pekerjaan']!,
+                    subtitle: data['tanggal']!,
+                    icon: Icons.work_outline,
+                    children: [
+                      _buildDetailRow("Saksi", data['saksi']!),
+                      _buildDetailRow("Status", data['status']!),
+                    ],
+                  );
+                }).toList(),
+              ),
+            _buildAddButton("Tambah Pekerjaan"),
+            const SizedBox(height: 30),
+            _buildSectionTitle("C. Materi yang dipelajari"),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 12,
+              runSpacing: 8,
               children: [
-                _buildTableHeader(["Materi", "Sts", "Tgl"]),
-                const ListTile(
-                  title: Text("Belum ada materi yang diinput."),
-                  dense: true,
-                ),
-                _buildAddButton("Tambah Materi"),
+                _buildLegend(Colors.green, "A : Approved"),
+                _buildLegend(Colors.orange, "P : Pending"),
+                _buildLegend(Colors.red, "R : Revisi"),
               ],
             ),
-          ),
-          // LEGEND APPROVED / PENDING / REVISI
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              _buildLegend(Colors.green, "A : Approved"),
-              const SizedBox(width: 20),
-              _buildLegend(Colors.orange, "P : Pending"),
-              const SizedBox(width: 20),
-              _buildLegend(Colors.red, "R : Revisi"),
-            ],
-          ),
+            const SizedBox(height: 12),
+            if (dummyMateri.isEmpty)
+              _buildEmptyState("Belum ada materi.")
+            else
+              Column(
+                children: dummyMateri.map((data) {
+                  Color statusColor = Colors.grey;
+                  if (data['status'] == 'A') statusColor = Colors.green;
+                  if (data['status'] == 'P') statusColor = Colors.orange;
+                  if (data['status'] == 'R') statusColor = Colors.red;
 
-          const SizedBox(height: 28),
+                  return _buildExpansionCard(
+                    title: data['materi']!,
+                    subtitle: data['tanggal']!,
+                    icon: Icons.menu_book_rounded,
+                    trailing: CircleAvatar(
+                      radius: 14,
+                      backgroundColor: statusColor,
+                      child: Text(
+                        data['status']!,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    children: [
+                      _buildDetailRow("Catatan", data['catatan']!),
+                    ],
+                  );
+                }).toList(),
+              ),
+            _buildAddButton("Tambah Materi"),
+            const SizedBox(height: 30),
+            _buildSectionTitle("D. Poin Mingguan"),
+            const SizedBox(height: 10),
+            _buildPoinCard(
+              title: "Project & Progress Belajar",
+              totalPoin: 15,
+              m1: 5,
+              m2: 5,
+              m3: 5,
+              m4: 0,
+            ),
+            _buildPoinCard(
+              title: "Laporan Pengetahuan Materi",
+              totalPoin: 8,
+              m1: 2,
+              m2: 2,
+              m3: 2,
+              m4: 2,
+            ),
+            const SizedBox(height: 16),
+            Card(
+              color: const Color(0xFF002147),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      "TOTAL POIN MINGGU INI",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "23",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
+          ],
+        ),
+      ),
+    );
+  }
 
-          // D. Poin
-          const Text(
-            "D. Poin",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 12),
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+          fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF002147)),
+    );
+  }
 
-          Container(
+  Widget _buildExpansionCard({
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    Widget? trailing,
+    required List<Widget> children,
+  }) {
+    return Card(
+      elevation: 2,
+      margin: const EdgeInsets.only(bottom: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Theme(
+        data: ThemeData().copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+          leading: Container(
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
+              color: Colors.blue.shade50,
+              borderRadius: BorderRadius.circular(8),
             ),
-            child: Column(
-              children: [
-                // Header
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                  color: Colors.blue.shade50,
-                  child: Row(
-                    children: const [
-                      Expanded(
-                        child: Text(
-                          "Kategori Poin",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 150,
-                        child: Text(
-                          "Jumlah Poin",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Sub header M1 - M4
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                  color: Colors.grey.shade100,
-                  child: Row(
-                    children: const [
-                      Expanded(child: SizedBox()),
-                      SizedBox(
-                        width: 150,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("M1"),
-                            Text("M2"),
-                            Text("M3"),
-                            Text("M4"),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Row 1
-                _buildPoinRow(
-                  "(5) mengerjakan project/adanya update progress belajar",
-                ),
-
-                // Row 2
-                _buildPoinRow(
-                  "(1 - 5) poin dari pertanyaan atau laporan pengetahuan materi",
-                ),
-
-                // Row 3
-                _buildPoinRow(
-                  "Jumlah poin minggu ini",
-                ),
-
-                // Row 4 (special, cuma 1 kolom poin)
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                  decoration: BoxDecoration(
-                    border:
-                        Border(top: BorderSide(color: Colors.grey.shade300)),
-                  ),
-                  child: Row(
-                    children: const [
-                      Expanded(
-                        child: Text("Jumlah poin ceklist pembiasaan"),
-                      ),
-                      SizedBox(
-                        width: 150,
-                        child: Center(child: Text("0")),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Row 5 total keseluruhan
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                  decoration: BoxDecoration(
-                    border:
-                        Border(top: BorderSide(color: Colors.grey.shade300)),
-                  ),
-                  child: Row(
-                    children: const [
-                      Expanded(
-                        child: Text("Jumlah keseluruhan poin"),
-                      ),
-                      SizedBox(
-                        width: 150,
-                        child: Center(child: Text("0")),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            child: Icon(icon, color: Colors.blue.shade700, size: 20),
           ),
+          title: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          ),
+          subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
+          trailing: trailing,
+          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          children: [
+            const Divider(),
+            ...children,
+          ],
+        ),
+      ),
+    );
+  }
 
-          const SizedBox(height: 40),
+  Widget _buildDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 80,
+            child: Text(label,
+                style: const TextStyle(color: Colors.grey, fontSize: 13)),
+          ),
+          const Text(":  ", style: TextStyle(color: Colors.grey)),
+          Expanded(
+            child: Text(value,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 13)),
+          ),
         ],
       ),
     );
   }
 
-  // LEGEND ITEM
-  Widget _buildLegend(Color color, String text) {
-    return Row(
+  Widget _buildPoinCard(
+      {required String title,
+      required int totalPoin,
+      required int m1,
+      required int m2,
+      required int m3,
+      required int m4}) {
+    return Card(
+      elevation: 0,
+      margin: const EdgeInsets.only(bottom: 8),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(color: Colors.grey.shade300)),
+      child: Theme(
+        data: ThemeData().copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+          title: Text(title,
+              style:
+                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+          trailing: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.blue.shade50,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Text(
+              "$totalPoin Pts",
+              style: TextStyle(
+                  color: Colors.blue.shade800,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12),
+            ),
+          ),
+          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          children: [
+            const Divider(),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildWeekScore("Hari 1", m1),
+                _buildWeekScore("Hari 2", m2),
+                _buildWeekScore("Hari 3", m3),
+                _buildWeekScore("Hari 4", m4),
+                _buildWeekScore("Hari 5", m4),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWeekScore(String label, int score) {
+    return Column(
       children: [
-        CircleAvatar(radius: 6, backgroundColor: color),
-        const SizedBox(width: 6),
-        Text(text),
+        Text(label, style: const TextStyle(fontSize: 10, color: Colors.grey)),
+        const SizedBox(height: 4),
+        Text(score.toString(),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
       ],
     );
   }
 
-  Widget _buildPoinRow(String text) {
+  Widget _buildEmptyState(String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.grey.shade300)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey.shade200),
       ),
-      child: Row(
-        children: [
-          Expanded(child: Text(text)),
-          SizedBox(
-            width: 150,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text("0"),
-                Text("0"),
-                Text("0"),
-                Text("0"),
-              ],
-            ),
-          ),
-        ],
+      child: Center(
+          child: Text(text, style: TextStyle(color: Colors.grey.shade500))),
+    );
+  }
+
+  Widget _buildAddButton(String text) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton.icon(
+        onPressed: () {},
+        icon: const Icon(Icons.add, size: 18),
+        label: Text(text),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF002147),
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          elevation: 0,
+        ),
       ),
     );
   }
 
-  // KALENDER GRID
+  Widget _buildLegend(Color color, String text) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 12,
+          height: 12,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
+        const SizedBox(width: 6),
+        Text(text, style: const TextStyle(fontSize: 12)),
+      ],
+    );
+  }
+
   Widget _buildCalendar() {
     List<String> days = [
       "03",
@@ -319,58 +415,24 @@ class JurnalPembiasaanPage extends StatelessWidget {
       itemCount: days.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 5,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        childAspectRatio: 1.2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        childAspectRatio: 1.0,
       ),
       itemBuilder: (context, index) {
         return Container(
           decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(6),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey.shade300),
           ),
           alignment: Alignment.center,
           child: Text(
             days[index],
-            style: const TextStyle(fontSize: 14),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         );
       },
-    );
-  }
-
-  // TABEL HEADER
-  Widget _buildTableHeader(List<String> titles) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      color: Colors.blue.shade50,
-      child: Row(
-        children: [
-          Expanded(
-              child: Text(titles[0],
-                  style: const TextStyle(fontWeight: FontWeight.bold))),
-          SizedBox(
-              width: 70,
-              child: Text(titles[1],
-                  style: const TextStyle(fontWeight: FontWeight.bold))),
-          SizedBox(
-              width: 70,
-              child: Text(titles[2],
-                  style: const TextStyle(fontWeight: FontWeight.bold))),
-        ],
-      ),
-    );
-  }
-
-  // BUTTON TAMBAH
-  Widget _buildAddButton(String text) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.only(left: 12, bottom: 12),
-      child: Text(
-        "+ $text",
-        style: const TextStyle(color: Colors.blue),
-      ),
     );
   }
 }
