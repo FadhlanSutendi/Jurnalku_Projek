@@ -7,6 +7,7 @@ import 'package:jurnalku_projek/account_settings.dart';
 import 'package:jurnalku_projek/permintaan_saksi_page.dart';
 import 'package:jurnalku_projek/jurnal_pembiasaan_page.dart';
 import 'package:jurnalku_projek/progres_page.dart';
+import 'package:jurnalku_projek/catatan_sikap_page.dart';
 
 class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titleText;
@@ -158,7 +159,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: InkWell(
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => CatatanSikapPage()));
                 },
                 child: const Row(
                   children: [

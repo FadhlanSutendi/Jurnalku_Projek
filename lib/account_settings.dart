@@ -117,12 +117,12 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                           // ========== FORM FIELD ==========
                           buildLabel("Nama"),
-                          buildReadOnlyField("Muhammad Delvin Julian"),
+                          buildReadOnlyField("Anak Wikrama"),
 
                           SizedBox(height: 12),
 
                           buildLabel("NIS"),
-                          buildReadOnlyField("123097919"),
+                          buildReadOnlyField("12309946"),
 
                           SizedBox(height: 12),
 
