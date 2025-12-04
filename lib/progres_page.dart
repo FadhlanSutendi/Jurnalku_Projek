@@ -5,11 +5,8 @@ import 'package:jurnalku_projek/projek_work_detail.dart';
 import 'package:jurnalku_projek/ukk_detail.dart';
 import 'package:jurnalku_projek/widgets/dashboard_app_bar.dart';
 
-
-
 class ProgresPage extends StatelessWidget {
   const ProgresPage({super.key});
-
 
   Color _getStatusColor(String status) {
     switch (status.toLowerCase()) {
@@ -25,7 +22,6 @@ class ProgresPage extends StatelessWidget {
     }
   }
 
-  
   Map<String, dynamic> _createSubjectData({
     required String subjectTitle,
     required String detailTitle,
@@ -48,38 +44,34 @@ class ProgresPage extends StatelessWidget {
     };
   }
 
- 
-  void _handleSubjectTap(BuildContext context, String subjectTitle, Map<String, dynamic> subjectData) {
+  void _handleSubjectTap(BuildContext context, String subjectTitle,
+      Map<String, dynamic> subjectData) {
     Widget destinationPage;
-    
-    
+
     switch (subjectTitle) {
       case "Project Work":
-        destinationPage = ProjekWorkDetail(data: subjectData); 
+        destinationPage = ProjekWorkDetail(data: subjectData);
         break;
       case "Mobile Apps":
-        destinationPage = MobileDetail(data: subjectData); 
+        destinationPage = MobileDetail(data: subjectData);
         break;
       case "UKK (Uji Kompetensi Keahlian)":
-        destinationPage = UkkDetail(data: subjectData); 
+        destinationPage = UkkDetail(data: subjectData);
         break;
       case "GIM":
-        destinationPage = GimDetail(data: subjectData); 
+        destinationPage = GimDetail(data: subjectData);
         break;
       default:
-        
         debugPrint("Halaman detail untuk $subjectTitle tidak ditemukan.");
-        return; 
+        return;
     }
 
-    
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => destinationPage),
     );
   }
 
- 
   Widget _buildClickableSubjectCard({
     required BuildContext context,
     required String subjectTitle,
@@ -91,7 +83,6 @@ class ProgresPage extends StatelessWidget {
     required String teacherNote,
     required String studentNote,
   }) {
-  
     final subjectData = _createSubjectData(
       subjectTitle: subjectTitle,
       detailTitle: detailTitle,
@@ -144,7 +135,7 @@ class ProgresPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    competency, 
+                    competency,
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black54,
@@ -153,14 +144,14 @@ class ProgresPage extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, size: 18, color: Colors.black54),
+            const Icon(Icons.arrow_forward_ios,
+                size: 18, color: Colors.black54),
           ],
         ),
       ),
     );
   }
 
- 
   Widget _buildInfoCard({
     required String title,
     required String value,
@@ -169,7 +160,6 @@ class ProgresPage extends StatelessWidget {
     required IconData icon,
     required Color iconColor,
   }) {
-    
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -234,7 +224,6 @@ class ProgresPage extends StatelessWidget {
     );
   }
 
- 
   Widget _buildLainnyaTable() {
     return Container(
       decoration: BoxDecoration(
@@ -271,7 +260,6 @@ class ProgresPage extends StatelessWidget {
     );
   }
 
- 
   Widget _buildDetailRow(String label, String value, {Color? valueColor}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -330,7 +318,6 @@ class ProgresPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
@@ -347,8 +334,6 @@ class ProgresPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-
-            
             _buildInfoCard(
               title: "Total Pengajuan",
               value: "2",
@@ -358,7 +343,6 @@ class ProgresPage extends StatelessWidget {
               iconColor: Colors.blue.shade100,
             ),
             const SizedBox(height: 14),
-
             _buildInfoCard(
               title: "Halaman Ini",
               value: "1",
@@ -368,7 +352,6 @@ class ProgresPage extends StatelessWidget {
               iconColor: Colors.green.shade100,
             ),
             const SizedBox(height: 14),
-
             _buildInfoCard(
               title: "Status Pending",
               value: "0",
@@ -378,7 +361,6 @@ class ProgresPage extends StatelessWidget {
               iconColor: Colors.orange.shade100,
             ),
             const SizedBox(height: 14),
-
             _buildInfoCard(
               title: "Total Halaman",
               value: "1",
@@ -387,11 +369,9 @@ class ProgresPage extends StatelessWidget {
               icon: Icons.folder_copy_outlined,
               iconColor: Colors.purple.shade100,
             ),
-
             const SizedBox(height: 28),
             const Divider(thickness: 0.7, color: Colors.black12),
             const SizedBox(height: 10),
-
             const Text(
               "Daftar Mata Pelajaran",
               style: TextStyle(
@@ -401,8 +381,6 @@ class ProgresPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-
-           
             _buildClickableSubjectCard(
               context: context,
               subjectTitle: "Project Work",
@@ -414,8 +392,6 @@ class ProgresPage extends StatelessWidget {
               teacherNote: "Hasil sangat bagus, tingkatkan lagi!",
               studentNote: "Sudah melakukan revisi sesuai arahan.",
             ),
-            
-          
             _buildClickableSubjectCard(
               context: context,
               subjectTitle: "Mobile Apps",
@@ -427,8 +403,6 @@ class ProgresPage extends StatelessWidget {
               teacherNote: "Menunggu submit tugas 3",
               studentNote: "Sedang mengerjakan tugas integrasi API.",
             ),
-            
-            
             _buildClickableSubjectCard(
               context: context,
               subjectTitle: "UKK (Uji Kompetensi Keahlian)",
@@ -440,8 +414,6 @@ class ProgresPage extends StatelessWidget {
               teacherNote: "Pastikan semua modul dipelajari.",
               studentNote: "Selesai revisi laporan, siap diuji.",
             ),
-            
-     
             _buildClickableSubjectCard(
               context: context,
               subjectTitle: "GIM",
@@ -453,11 +425,9 @@ class ProgresPage extends StatelessWidget {
               teacherNote: "Konsep warna sudah baik.",
               studentNote: "Sudah mengumpulkan final design.",
             ),
-
             const SizedBox(height: 30),
             const Divider(thickness: 0.7, color: Colors.black12),
             const SizedBox(height: 18),
-
             const Text(
               "Lainnya",
               style: TextStyle(
@@ -475,7 +445,6 @@ class ProgresPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-
             _buildLainnyaTable(),
           ],
         ),
