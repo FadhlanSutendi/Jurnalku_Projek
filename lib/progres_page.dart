@@ -5,11 +5,8 @@ import 'package:jurnalku_projek/projek_work_detail.dart';
 import 'package:jurnalku_projek/ukk_detail.dart';
 import 'package:jurnalku_projek/widgets/dashboard_app_bar.dart';
 
-
-
 class ProgresPage extends StatelessWidget {
   const ProgresPage({super.key});
-
 
   Color _getStatusColor(String status) {
     switch (status.toLowerCase()) {
@@ -25,7 +22,6 @@ class ProgresPage extends StatelessWidget {
     }
   }
 
-  
   Map<String, dynamic> _createSubjectData({
     required String subjectTitle,
     required String detailTitle,
@@ -48,38 +44,33 @@ class ProgresPage extends StatelessWidget {
     };
   }
 
- 
   void _handleSubjectTap(BuildContext context, String subjectTitle, Map<String, dynamic> subjectData) {
     Widget destinationPage;
-    
-    
+
     switch (subjectTitle) {
       case "Project Work":
-        destinationPage = ProjekWorkDetail(data: subjectData); 
+        destinationPage = ProjekWorkDetail(data: subjectData);
         break;
       case "Mobile Apps":
-        destinationPage = MobileDetail(data: subjectData); 
+        destinationPage = MobileDetail(data: subjectData);
         break;
       case "UKK (Uji Kompetensi Keahlian)":
-        destinationPage = UkkDetail(data: subjectData); 
+        destinationPage = UkkDetail(data: subjectData);
         break;
       case "GIM":
-        destinationPage = GimDetail(data: subjectData); 
+        destinationPage = GimDetail(data: subjectData);
         break;
       default:
-        
         debugPrint("Halaman detail untuk $subjectTitle tidak ditemukan.");
-        return; 
+        return;
     }
 
-    
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => destinationPage),
     );
   }
 
- 
   Widget _buildClickableSubjectCard({
     required BuildContext context,
     required String subjectTitle,
@@ -91,7 +82,6 @@ class ProgresPage extends StatelessWidget {
     required String teacherNote,
     required String studentNote,
   }) {
-  
     final subjectData = _createSubjectData(
       subjectTitle: subjectTitle,
       detailTitle: detailTitle,
@@ -144,7 +134,7 @@ class ProgresPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    competency, 
+                    competency,
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black54,
@@ -160,7 +150,6 @@ class ProgresPage extends StatelessWidget {
     );
   }
 
- 
   Widget _buildInfoCard({
     required String title,
     required String value,
@@ -169,7 +158,6 @@ class ProgresPage extends StatelessWidget {
     required IconData icon,
     required Color iconColor,
   }) {
-    
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -234,8 +222,21 @@ class ProgresPage extends StatelessWidget {
     );
   }
 
- 
-  Widget _buildLainnyaTable() {
+  // NOTE: Fungsi _buildLainnyaTable() asli yang menggunakan DataTable telah DITAHAN.
+  // Widget _buildLainnyaTable() {
+  //   return Container(
+  //     // ... DataTable code ...
+  //   );
+  // }
+
+  // 🆕 FUNGSI BARU: Menggantikan DataTable dengan ExpansionTile untuk tampilan mobile yang lebih baik.
+  Widget _buildLainnyaExpansionList() {
+    // Data dari _buildLainnyaTable()
+    final List<Map<String, String>> dataTambahan = [
+      {"kompetensi": "Diagram", "tanggal": "20 Nov 2025", "catatan": "Tidak ada catatan"},
+      {"kompetensi": "Sql (BikeStores)", "tanggal": "20 Nov 2025", "catatan": "Tidak ada catatan"},
+    ];
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -248,30 +249,38 @@ class ProgresPage extends StatelessWidget {
           ),
         ],
       ),
-      child: DataTable(
-        headingRowColor: WidgetStateProperty.all(Colors.grey.shade100),
-        columns: const [
-          DataColumn(label: Text("KOMPETENSI")),
-          DataColumn(label: Text("TANGGAL")),
-          DataColumn(label: Text("CATATAN")),
-        ],
-        rows: const [
-          DataRow(cells: [
-            DataCell(Text("Diagram")),
-            DataCell(Text("20 Nov 2025")),
-            DataCell(Text("Tidak ada catatan")),
-          ]),
-          DataRow(cells: [
-            DataCell(Text("Sql (BikeStores)")),
-            DataCell(Text("20 Nov 2025")),
-            DataCell(Text("Tidak ada catatan")),
-          ]),
-        ],
+      child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(), // Agar bisa di-scroll bersama SingleChildScrollView
+        shrinkWrap: true,
+        itemCount: dataTambahan.length,
+        itemBuilder: (context, index) {
+          final item = dataTambahan[index];
+          return ExpansionTile(
+            tilePadding: const EdgeInsets.symmetric(horizontal: 16),
+            leading: const Icon(Icons.notes, color: Colors.blueGrey),
+            title: Text(
+              item['kompetensi']!,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+            subtitle: Text("Tanggal: ${item['tanggal']!}"),
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildDetailRow("Tanggal Ujian", item['tanggal']!),
+                    _buildDetailRow("Catatan Guru", item['catatan']!),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
- 
   Widget _buildDetailRow(String label, String value, {Color? valueColor}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -348,7 +357,7 @@ class ProgresPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            
+            // Info Cards
             _buildInfoCard(
               title: "Total Pengajuan",
               value: "2",
@@ -402,52 +411,49 @@ class ProgresPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-           
+            // Subject Cards
             _buildClickableSubjectCard(
               context: context,
               subjectTitle: "Project Work",
               detailTitle: "Nama Project Work",
               competency: "Membuat Aplikasi Mobile Sederhana",
-              teacher: "Budi Santoso, S.Kom",
-              date: "20 Nov 2025",
+              teacher: "Pa Guru",
+              date: "27 Nov 2025",
               status: "Disetujui",
               teacherNote: "Hasil sangat bagus, tingkatkan lagi!",
               studentNote: "Sudah melakukan revisi sesuai arahan.",
             ),
-            
-          
+
             _buildClickableSubjectCard(
               context: context,
               subjectTitle: "Mobile Apps",
               detailTitle: "Kompetensi Utama Mobile Apps",
               competency: "Pengembangan Flutter Dasar",
-              teacher: "Ani Wijaya, M.T.",
-              date: "17 Nov 2025",
+              teacher: "Ibu Guru",
+              date: "4 Nov 2025",
               status: "Pending",
               teacherNote: "Menunggu submit tugas 3",
               studentNote: "Sedang mengerjakan tugas integrasi API.",
             ),
-            
-            
+
             _buildClickableSubjectCard(
               context: context,
               subjectTitle: "UKK (Uji Kompetensi Keahlian)",
               detailTitle: "Persiapan Uji Kompetensi",
               competency: "Simulasi Uji Praktik",
-              teacher: "Tim Guru Produktif",
-              date: "25 Nov 2025",
+              teacher: "Guru Produktif",
+              date: "5 Nov 2025",
               status: "Pending",
               teacherNote: "Pastikan semua modul dipelajari.",
               studentNote: "Selesai revisi laporan, siap diuji.",
             ),
-            
-     
+
             _buildClickableSubjectCard(
               context: context,
               subjectTitle: "GIM",
               detailTitle: "Materi Desain Grafis",
               competency: "Desain UI/UX menggunakan Figma",
-              teacher: "Susi Susanti, S.E.",
+              teacher: "Guru Gim",
               date: "05 Nov 2025",
               status: "Disetujui",
               teacherNote: "Konsep warna sudah baik.",
@@ -472,11 +478,13 @@ class ProgresPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black87,
+                fontWeight: FontWeight.w500, 
               ),
             ),
             const SizedBox(height: 20),
 
-            _buildLainnyaTable(),
+            // 🛠️ PENGGANTIAN DI SINI: Memanggil Expansion List yang baru
+            _buildLainnyaExpansionList(),
           ],
         ),
       ),
