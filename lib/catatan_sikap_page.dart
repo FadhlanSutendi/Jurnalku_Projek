@@ -34,9 +34,7 @@ class CatatanSikapPage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            // ===================
-            // TITLE SECTION
-            // ===================
+            
             const Text(
               "Catatan Sikap Saya",
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
@@ -48,9 +46,6 @@ class CatatanSikapPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // ===================
-            // WARNING BOX
-            // ===================
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(

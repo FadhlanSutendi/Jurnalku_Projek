@@ -26,7 +26,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ================= TITLE ====================
+                  
                     Text(
                       "Pengaturan Akun",
                       style: TextStyle(
@@ -37,7 +37,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                     SizedBox(height: 4),
 
-                    // ================= BREADCRUMB ====================
+                    
                     Text(
                       "Dashboard / Pengaturan Akun",
                       style: TextStyle(
@@ -48,7 +48,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                     SizedBox(height: 18),
 
-                    // ================= CARD PROFIL ====================
+           
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(18),
@@ -72,7 +72,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                           SizedBox(height: 16),
 
-                          // FOTO PROFIL + CAMERA BUTTON
+               
                           Center(
                             child: Stack(
                               children: [
@@ -115,7 +115,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                           SizedBox(height: 20),
 
-                          // ========== FORM FIELD ==========
+                         
                           buildLabel("Nama"),
                           buildReadOnlyField("Anak Wikrama"),
 
@@ -139,7 +139,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                     SizedBox(height: 16),
 
-                    // ================= CARD UBAH KATA SANDI ====================
+            
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(18),
@@ -161,7 +161,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                           SizedBox(height: 20),
 
-                          // ===== KATA SANDI LAMA =====
+                      
                           Text(
                             "Kata Sandi Lama",
                             style: TextStyle(
@@ -208,7 +208,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                           SizedBox(height: 20),
 
-                          // ===== KATA SANDI BARU =====
+                      
                           Text(
                             "Kata Sandi Baru",
                             style: TextStyle(
@@ -247,7 +247,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                           SizedBox(height: 26),
 
-                          // ===== BUTTON SIMPAN =====
+                          
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
@@ -284,9 +284,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
     );
   }
 
-  // ======================================================
-  // WIDGET FORM FIELD REUSABLE
-  // ======================================================
+
   Widget buildLabel(String text) {
     return Text(
       text,
