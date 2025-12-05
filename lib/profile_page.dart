@@ -15,7 +15,7 @@ class ProfilePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: const DashboardAppBar(
-          titleText: "Profile",
+          titleText: "Profile > Siswa",
         ),
         body: Column(
           children: [
